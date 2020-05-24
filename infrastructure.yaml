@@ -1,0 +1,54 @@
+Resources:
+  # cluster
+  Cluster:
+    Type: AWS::ECS::Cluster
+    Properties: 
+      ClusterName: cluster
+  # service
+  Service:
+    Type: AWS::ECS::Service
+    Properties: 
+      ServiceName: webapp
+      Cluster: !Ref Cluster
+      TaskDefinition: !Ref TaskDefinition
+      DeploymentConfiguration:
+        MinimumHealthyPercent: 100
+        MaximumPercent: 200
+      DesiredCount: 1
+      LaunchType: FARGATE
+      NetworkConfiguration: 
+        AwsvpcConfiguration:
+          # DISABLE if using private subnets that access to NAT gateway
+          AssignPublicIp: ENABLED
+          Subnets:
+            - subnet-94e420ff
+          SecurityGroups:
+            - sg-0c8df9d2cd7c522e7
+  # task definition
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      ContainerDefinitions:
+        -
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: /ecs/webapp
+              awslogs-region: us-east-2
+              awslogs-stream-prefix: ecs
+          PortMappings:
+            -
+              ContainerPort: 80
+              HostPort: 80
+          MemoryReservation: 128
+          Image: 590945069032.dkr.ecr.us-east-2.amazonaws.com/webapp:latest
+          Essential: true
+          Name: webapp
+      ExecutionRoleArn: arn:aws:iam::590945069032:role/ecsTaskExecutionRole
+      Memory: 512
+      TaskRoleArn: arn:aws:iam::590945069032:role/ecsTaskExecutionRole
+      RequiresCompatibilities:
+        - "FARGATE"
+      NetworkMode: awsvpc
+      Cpu: 256
+      Family: webapp
