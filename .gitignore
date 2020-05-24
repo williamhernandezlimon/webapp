@@ -1,7 +1,6 @@
 # byte-compiled / optimized / DLL files
 .pytest_cache
 __pycache__/
-api/__pycache__/
 *.py[cod]
 
 # unit-tests

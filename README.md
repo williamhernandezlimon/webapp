@@ -52,8 +52,11 @@ Running on AWS EC2
 			* `docker tag [docker_image_id] [repositoryUri]/[docker_image_name:version]`
 		* push docker image to ecr
 			* `docker push [repositoryUri]/[docker_image_name:version]`
-	* ecs
-		* 
+	* cloudformation
+		* upload `infrastructure.yaml`
+* run
+	* after cloudformation template was successfully uploaded, look for the public ip address in the new task running on the new ecs cluster/service
+	* hit [public_ip_address]/api/v1/task
 
 
 
