@@ -12,8 +12,8 @@ COPY . /webapp
 # no-cache so no extra images are used
 RUN pip3 --no-cache-dir install -r requirements.txt
 
-# open port
-EXPOSE 5000
+# only port 80 is available with aws free tier
+EXPOSE 80 
 
 # have container running in background
 ENTRYPOINT ["python3", "app.py"]

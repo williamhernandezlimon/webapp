@@ -11,6 +11,6 @@ if __name__ == '__main__':
 
 	# host="0.0.0.0"  means it can accept request from any server
 	# use_reloader=True  will reload after saving
-	flaskapp.run(host="0.0.0.0", port=5000, debug=True, use_reloader=True)
+	flaskapp.run(host="0.0.0.0", port=80, debug=True, use_reloader=True)
 
 
