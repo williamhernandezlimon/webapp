@@ -9,7 +9,7 @@ Running locally
 		    * pip3
 		* setup virtual environment (optional)
 			* python3 -m pip install --user virtualenv
-			* python3 -m venv env
+			* python3 -m venv venv
 			* source venv/bin/activate
 		* download dependencies
 		  * `pip3 install -r requirements.txt`
